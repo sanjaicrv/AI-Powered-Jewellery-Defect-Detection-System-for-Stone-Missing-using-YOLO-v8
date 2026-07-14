@@ -1,0 +1,14 @@
+path: d:/Final year project/Anomaly Detection in Jewellery.v1i.yolov8
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 1
+names: ['missing gem']
+
+roboflow:
+  workspace: sanjais-workspace-m5pnm
+  project: anomaly-detection-in-jewellery-b1zdj
+  version: 1
+  license: CC BY 4.0
+  url: https://app.roboflow.com/sanjais-workspace-m5pnm/anomaly-detection-in-jewellery-b1zdj/1
