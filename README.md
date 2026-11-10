@@ -129,16 +129,25 @@ All metrics plots, confusion matrices, and training logs are saved automatically
 
 ---
 
-## Inference (Prediction)
-To run predictions on all images in the `test/` split:
-```powershell
-python predict.py
-```
-* Predictions are saved with visualized bounding boxes in: `runs/detect/predict/`
-* **Test Summary**:
-  * **Test Images Processed**: 100
-  * **Total 'missing gem' Defects Detected**: 137
-  * **Images containing defects**: 65 / 100
+---
+
+## Multi-Modal Interactive Web Application
+
+An interactive web application is included to run real-time AI jewellery anomaly inspection across **three modes**:
+1. **📸 Image Inspection**: Drag-and-drop / paste macro photographs or pick from preloaded test dataset samples with side-by-side comparison, defect bounding boxes, and CSV breakdown.
+2. **🎬 Video Inspection**: Upload video files (`.mp4`, `.avi`, `.mov`, `.webm`, `.mkv`) or test the 1-click preloaded demo clip (`sample_jewellery_demo.mp4`). Features synchronized dual video playback (Original vs YOLOv8 Annotated), real-time progress bar, interactive defect timestamp jump-markers, and downloadable annotated MP4 videos.
+3. **🔴 Live Camera Feed**: Real-time continuous defect detection via Browser Webcam (or Server USB Camera). Features a live dynamically adjustable confidence score slider that updates detection thresholds in real time, audible anomaly alert chime, live FPS and inference latency monitors, and instant snapshot capture.
+
+### Running the Web Application:
+* **Double-click batch runner**:
+  ```cmd
+  run_web_app.bat
+  ```
+* **Or run from PowerShell/terminal**:
+  ```powershell
+  .\venv\Scripts\python.exe web_app.py 8080
+  ```
+* Open your browser at: **`http://localhost:8080`**
 
 ---
 

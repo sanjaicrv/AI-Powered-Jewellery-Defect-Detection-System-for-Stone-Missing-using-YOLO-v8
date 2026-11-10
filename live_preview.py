@@ -36,11 +36,30 @@ def main():
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
     
+    retry_count = 0
+    max_retries = 10
+    
     while True:
         ret, frame = cap.read()
         if not ret:
-            print("Error: Failed to read frame from webcam.")
-            break
+            print("Warning: Failed to read frame. Stream may have disconnected. Attempting to reconnect...")
+            cap.release()
+            
+            # Try to reconnect
+            connected = False
+            for i in range(max_retries):
+                print(f"Reconnection attempt {i+1}/{max_retries} in 2 seconds...")
+                cv2.waitKey(2000)
+                cap = cv2.VideoCapture(source)
+                if cap.isOpened():
+                    print("Reconnection successful!")
+                    connected = True
+                    break
+            
+            if not connected:
+                print("Error: Could not reconnect to stream after multiple attempts.")
+                break
+            continue
             
         # Run YOLOv8 inference on the live frame
         # - stream=True: returns generator for optimized memory usage during video processing
